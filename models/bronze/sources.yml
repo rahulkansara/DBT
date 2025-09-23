@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: Raw data loaded into Snowflake
+    schema: bronze
+    tables:
+      - name: raw_customers
+        description: Raw customer data
+        columns:
+          - name: customer_id
+            description: Unique customer identifier
+        tests:
+          - unique
+          - not null
+
+      - name: raw_orders
+        description: Raw order data
+        columns:
+          - name: order_id
+            description: Unique order identifier
+        tests:
+          - unique
+          - relationships:
+              field: source('raw_data','raw_customers')
+              to: customer_id
+
+      - name: raw_products
+        description: Raw product data
+        columns:
+          - name: product_id
+            description: Unique product identifier
+        tests:
+          - unique
+          - not null
+      
