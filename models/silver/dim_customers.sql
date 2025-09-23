@@ -1,6 +1,5 @@
 {{ config(materialized='table') }}
 
-
 SELECT
     customer_id,
     TRIM(UPPER(first_name)) as first_name,
