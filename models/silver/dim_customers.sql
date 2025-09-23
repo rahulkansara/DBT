@@ -1,17 +1,20 @@
-{{ config(materialized='table') }}
+{{ config(materialized="table") }}
 
-SELECT
+select
     customer_id,
-    TRIM(UPPER(first_name)) as first_name,
-    TRIM(UPPER(last_name)) as last_name,
-    LOWER(TRIM(email)) as email,
-    TO_DATE(signup_date) as signup_date,
-    CASE
-        WHEN subscription_type = 'Premium' THEN 'PREMIUM'
-        WHEN subscription_type = 'Standard' THEN 'STANDARD'  
-        WHEN subscription_type = 'Basic' THEN 'BASIC'
-        ELSE 'UNKNOWN'
-    END as subscription_type_clean,
-    CURRENT_TIMESTAMP() as processed_at
-FROM {{ source('raw_data', 'raw_customers') }}
-WHERE email IS NOT NULL
+    trim(upper(first_name)) as first_name,
+    trim(upper(last_name)) as last_name,
+    lower(trim(email)) as email,
+    to_date(signup_date) as signup_date,
+    case
+        when subscription_type = 'Premium'
+        then 'PREMIUM'
+        when subscription_type = 'Standard'
+        then 'STANDARD'
+        when subscription_type = 'Basic'
+        then 'BASIC'
+        else 'UNKNOWN'
+    end as subscription_type_clean,
+    current_timestamp() as processed_at
+from {{ source("raw_data", "raw_customers") }}
+where email is not null
