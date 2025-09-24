@@ -7,12 +7,9 @@ select
     lower(trim(email)) as email,
     to_date(signup_date) as signup_date,
     case
-        when subscription_type = 'Premium'
-        then 'PREMIUM'
-        when subscription_type = 'Standard'
-        then 'STANDARD'
-        when subscription_type = 'Basic'
-        then 'BASIC'
+        when subscription_type = 'Premium' then 'PREMIUM'
+        when subscription_type = 'Standard' then 'STANDARD'
+        when subscription_type = 'Basic' then 'BASIC'
         else 'UNKNOWN'
     end as subscription_type_clean,
     current_timestamp() as processed_at
