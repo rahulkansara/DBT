@@ -12,7 +12,7 @@ sources:
             description: Unique customer identifier
         tests:
           - unique
-          - not null
+          - not_null
 
       - name: raw_orders
         description: Raw order data
@@ -32,5 +32,5 @@ sources:
             description: Unique product identifier
         tests:
           - unique
-          - not null
+          - not_null
       
